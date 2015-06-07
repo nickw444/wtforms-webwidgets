@@ -1,5 +1,5 @@
 from functools import wraps
-from ..abstract import custom_widget_wrapper
+from ..common import custom_widget_wrapper
 from wtforms.widgets.core import HTMLString
 
 __all__ = ['bootstrap_styled']

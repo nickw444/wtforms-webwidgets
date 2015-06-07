@@ -6,19 +6,21 @@ Widgets to override the default widgets provided with wtforms.
 import wtforms.widgets.core as wt_core
 from .util import bootstrap_styled
 from .abstract import BootstrapPlainCheckboxRadio
-from ..abstract import CustomWidgetMixin
+from ..common import CustomWidgetMixin
 
-__all__ = (
+__all__ = [
     'PlainCheckbox', 'PlainRadio', 'TextInput', 'PasswordInput', 'HiddenInput',
     'CheckboxInput', 'RadioInput', 'FileInput', 'SubmitInput', 'TextArea',
     'Select'
-)
+]
 
 class PlainCheckbox(BootstrapPlainCheckboxRadio):
+    """Render a checkbox without any bootstrap container classes."""
     def __init__(self):
         self.input_type = 'checkbox'
 
 class PlainRadio(BootstrapPlainCheckboxRadio):
+    """Render a radio without any bootstrap container classes."""
     def __init__(self):
         self.input_type = 'radio'
 
@@ -26,10 +28,18 @@ class PlainRadio(BootstrapPlainCheckboxRadio):
 TextInput = bootstrap_styled(wt_core.TextInput)
 PasswordInput = bootstrap_styled(wt_core.PasswordInput)
 HiddenInput = wt_core.HiddenInput # We don't need to style this.
-CheckboxInput = bootstrap_styled(PlainCheckbox)
-RadioInput = bootstrap_styled(PlainRadio)
-FileInput = bootstrap_styled(wt_core.FileInput, input_class=None)
 
+@bootstrap_styled
+class CheckboxInput(PlainCheckbox):
+    """Render a checkbox, encapsulated within a form-group"""
+    pass
+
+@bootstrap_styled
+class RadioInput(PlainRadio):
+    """Render a radio button, encapsulated within a form-group"""
+    pass
+
+FileInput = bootstrap_styled(wt_core.FileInput, input_class=None)
 
 class SubmitInput(wt_core.SubmitInput, CustomWidgetMixin):
     def __call__(self, field, **kwargs):

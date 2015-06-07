@@ -2,8 +2,8 @@
 Additional Widgets Provided for use with Bootstrap
 """
 from .util import bootstrap_styled
-from ..abstract import MultiField as _MultiField
-from ..abstract import CustomWidgetMixin
+from ..common import MultiField as _MultiField
+from ..common import CustomWidgetMixin
 from .core import PlainCheckbox, PlainRadio
 
 
@@ -18,6 +18,7 @@ class JasnyFileInput(CustomWidgetMixin):
     """
 
     def __init__(self):
+        
         self._field_renderer = FileInput()
 
     def __call__(self, field, **kwargs):
@@ -42,7 +43,11 @@ class JasnyFileInput(CustomWidgetMixin):
 @bootstrap_styled(input_class=None)
 class MultiField(_MultiField, CustomWidgetMixin):
     """
-    Render a compatible field's possible choices using the given choice renderer.
+    Render a compatible field's choices using the given choice renderer.
+
+    Args: 
+        choice_renderer (Widget): The widget to call to render any subfields 
+            for this field.
     """
 
     def __init__(self, choice_renderer):
@@ -52,6 +57,8 @@ class MultiField(_MultiField, CustomWidgetMixin):
 class RadioGroup(MultiField):
     """
     Render a compatible field's possible choices using radio boxes
+
+    An alias of ``MultiField(choice_renderer=PlainRadio())``
     """
     def __init__(self):
         self.choice_renderer = PlainRadio()
@@ -59,6 +66,8 @@ class RadioGroup(MultiField):
 class CheckboxGroup(MultiField):
     """
     Render a compatible field's possible choices using check boxes.
+
+    An alias of ``MultiField(choice_renderer=PlainCheckbox())``
     """
     def __init__(self):
         self.choice_renderer = PlainCheckbox()
