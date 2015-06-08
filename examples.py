@@ -55,6 +55,7 @@ class BasicForm(Form):
     textfield_no = wt.TextField('My Text Field Without Widget')
     filefield = wt.FileField('My File Upload', widget=wt_bs.FileInput())
     filefield_no = wt.FileField('My File Upload Without Widget')
+    imagefield = wt.FileField('My Image Upload', widget=wt_bs.JasnyImageInput())
 
 @app.route('/basic')
 def basic():
@@ -75,6 +76,7 @@ def basic():
         {{ form.textfield_no }}
         {{ form.filefield }}
         {{ form.filefield_no }}
+        {{ form.imagefield }}
     </div>
     </body>
     """, form=form)
