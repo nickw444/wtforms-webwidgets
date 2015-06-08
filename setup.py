@@ -22,6 +22,7 @@ setup(
   long_description=long_description,
   url='https://github.com/nickw444/wtforms-webwidgets',
   zip_safe=False,
+  include_package_data=True,
   install_requires=[
         "wtforms",
   ],
