@@ -78,14 +78,16 @@ class MultiField(CustomWidgetMixin):
         field_id = kwargs.pop('id', field.id)
 
         html = [u'<div {0}>'.format(html_params(id=field_id, class_=container_class))]
-        for value, label, checked in field.iter_choices():
-            choice_id = u'%s-%s' % (field_id, value)
-            options = dict(kwargs, label=label, value=value, id=choice_id)
-            if checked:
-                options['checked'] = 'checked'
+        if field.iter_choices():
+            for value, label, checked in field.iter_choices():
+                choice_id = u'%s-%s' % (field_id, value)
+                options = dict(kwargs, label=label, value=value, id=choice_id)
+                if checked:
+                    options['checked'] = 'checked'
 
-            field.checked = checked 
-            html.append(self.choice_renderer(field, **options))
+                field.checked = checked 
+                field.label.text = label
+                html.append(self.choice_renderer(field, **options))
 
         html.append(u'</div>')
         return HTMLString(u''.join(html))

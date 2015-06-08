@@ -29,15 +29,8 @@ TextInput = bootstrap_styled(wt_core.TextInput)
 PasswordInput = bootstrap_styled(wt_core.PasswordInput)
 HiddenInput = wt_core.HiddenInput # We don't need to style this.
 
-@bootstrap_styled
-class CheckboxInput(PlainCheckbox):
-    """Render a checkbox, encapsulated within a form-group"""
-    pass
-
-@bootstrap_styled
-class RadioInput(PlainRadio):
-    """Render a radio button, encapsulated within a form-group"""
-    pass
+CheckboxInput = PlainCheckbox
+RadioInput = PlainRadio
 
 FileInput = bootstrap_styled(wt_core.FileInput, input_class=None)
 

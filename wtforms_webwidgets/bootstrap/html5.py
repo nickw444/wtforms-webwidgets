@@ -10,8 +10,6 @@ import sys
 thismodule = sys.modules[__name__]
 __all__ = []
 
-
-
 #Build the widget classes using our factory in util.py
 for widget_name in wt_html5.__all__:
     if issubclass(getattr(wt_html5, widget_name), wt_core.Input):

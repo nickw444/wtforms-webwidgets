@@ -78,9 +78,10 @@ def bootstrap_styled(cls=None, add_meta=True, form_group=True,
     """
 
     def real_decorator(cls):
-        cls = custom_widget_wrapper(cls)
+        class NewClass(cls): pass
+        NewClass = custom_widget_wrapper(NewClass)
 
-        _call = cls.__call__
+        _call = NewClass.__call__
 
         def call(*args, **kwargs):
             if input_class:
@@ -91,8 +92,8 @@ def bootstrap_styled(cls=None, add_meta=True, form_group=True,
         if add_meta: call = meta_wrapped(call)
         if form_group: call = form_group_wrapped(call)
 
-        cls.__call__ = call
-        return cls
+        NewClass.__call__ = call
+        return NewClass
 
     if cls:
         # Allow calling decorator(cls) instead of decorator()(cls)
