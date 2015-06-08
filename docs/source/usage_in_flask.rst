@@ -41,7 +41,7 @@ An example from Flask/Jinja.
     # Alternatively, you can declare your own lookup dictionary:
     import wtforms_webwidgets.bootstrap as wt_bs
     renderer = FieldRenderer(lookup_dict={
-        'TextField': wt_bs.TextInput,
+        'TextField': wt_bs.TextInput(),
     })
 
     # Example for injecting into Jinja within Flask
