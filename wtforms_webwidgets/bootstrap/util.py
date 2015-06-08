@@ -79,6 +79,7 @@ def bootstrap_styled(cls=None, add_meta=True, form_group=True,
 
     def real_decorator(cls):
         class NewClass(cls): pass
+        NewClass.__name__ = cls.__name__
         NewClass = custom_widget_wrapper(NewClass)
 
         _call = NewClass.__call__
