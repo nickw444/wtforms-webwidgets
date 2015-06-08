@@ -1,3 +1,7 @@
+"""
+A Flask app to render all fields using different methods.
+"""
+
 from flask import Flask, render_template_string
 from flask_wtf import Form
 from wtforms_webwidgets import FieldRenderer
