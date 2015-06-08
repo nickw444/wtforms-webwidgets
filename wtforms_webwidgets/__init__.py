@@ -1,14 +1,12 @@
 """
-WTForms Extended Widgets
-########################
-
-This package aims to one day eventually contain advanced widgets for all the
+WTForms-Webwidgets
+==================
+This package aims to one day eventually contain comprehensive widgets for all the
 common web UI frameworks.
 
 Currently this module contains widgets for:
  
- - Boostrap
-
+    * Bootstrap
 """
 
 from .common import *
