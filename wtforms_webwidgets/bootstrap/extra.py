@@ -5,9 +5,10 @@ from .util import bootstrap_styled
 from ..common import MultiField as _MultiField
 from ..common import CustomWidgetMixin
 from .core import PlainCheckbox, PlainRadio
+import wtforms.widgets.core as wt_core
 
-
-__all__ = ['JasnyFileInput', 'MultiField', 'CheckboxGroup','RadioGroup']
+__all__ = ['JasnyFileInput', 'MultiField', 'CheckboxGroup','RadioGroup', 
+           'LabelAboveCheckbox']
 
 from wtforms.widgets import FileInput
 
@@ -71,3 +72,13 @@ class CheckboxGroup(MultiField):
     """
     def __init__(self):
         self.choice_renderer = PlainCheckbox()
+
+@bootstrap_styled(input_class='')
+class LabelAboveCheckbox(wt_core.CheckboxInput):
+    """
+    Render a checkbox with it's label above rather than next to it.
+    """
+    def __call__(self, field, **kwargs):
+        field = wt_core.CheckboxInput.__call__(self, field, **kwargs)
+        return "<div>{0}</div>".format(field)
+
