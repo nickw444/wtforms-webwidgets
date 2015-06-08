@@ -1,1 +1,2 @@
+recursive-include wtforms_webwidgets *.py
 include LICENSE README.rst setup.cfg VERSION
