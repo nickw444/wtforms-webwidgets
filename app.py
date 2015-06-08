@@ -35,6 +35,9 @@ bs_fields = {
         (wt.HiddenField, wt_bs.HiddenInput(),{}),
         (wt.FileField, wt_bs.FileInput(),{}),
         (wt.SubmitField, wt_bs.SubmitInput(),{}),
+        (wt.TextField, wt_bs.TextArea(),{}),
+        (wt.SelectField, wt_bs.Select(),{'choices':[('choice1','Choice1'), ('choice2','Choice2')]}),
+        (wt.SelectMultipleField, wt_bs.Select(multiple=True),{'choices':[('choice1','Choice1'), ('choice2','Choice2')]}),
     ],
     'extra': [
         (wt.FileField, wt_bs.JasnyFileInput(),{}),
