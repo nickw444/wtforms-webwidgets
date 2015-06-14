@@ -45,6 +45,7 @@ bs_fields = {
     ],
     'extra': [
         (wt.FileField, wt_bs.JasnyFileInput(),{'name_override':'JasnyFileInput'}),
+        (wt.FileField, wt_bs.JasnyImageInput(),{'name_override':'JasnyImageInput'}),
         (wt.BooleanField, wt_bs.LabelAboveCheckbox(),{}),
         (wt.SelectMultipleField, wt_bs.RadioGroup(), {'choices':[('choice1','Choice1'), ('choice2','Choice2')]}),
         (wt.SelectMultipleField, wt_bs.CheckboxGroup(), {'choices':[('choice1','Choice1'), ('choice2','Choice2')]}),

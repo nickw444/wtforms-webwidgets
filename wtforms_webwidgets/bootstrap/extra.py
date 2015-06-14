@@ -7,10 +7,40 @@ from ..common import CustomWidgetMixin
 from .core import PlainCheckbox, PlainRadio
 import wtforms.widgets.core as wt_core
 
-__all__ = ['JasnyFileInput', 'MultiField', 'CheckboxGroup','RadioGroup', 
-           'LabelAboveCheckbox']
+__all__ = ['JasnyImageInput', 'JasnyFileInput', 'MultiField', 'CheckboxGroup',
+           'RadioGroup', 'LabelAboveCheckbox']
 
 from wtforms.widgets import FileInput
+
+@bootstrap_styled(input_class=None)
+class JasnyImageInput(CustomWidgetMixin):
+    """
+    A Jasny-Bootstrap renderer widget. (Requires Jasny-bootstrap js and css)
+    """
+
+    def __init__(self):
+        
+        self._field_renderer = FileInput()
+
+    def __call__(self, field, **kwargs):
+        html = """
+        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+          <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+          <div>
+            <span class="btn btn-default btn-file">
+                <span class="fileinput-new">Select image</span>
+                <span class="fileinput-exists">Change</span>
+                <input type="file" name="...">
+                {rendered_field}
+            </span>
+            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+          </div>
+        </div>
+        """.format(
+            rendered_field=self._field_renderer(field, **kwargs)
+        )
+        return html
+
 
 @bootstrap_styled(input_class=None)
 class JasnyFileInput(CustomWidgetMixin):
@@ -19,7 +49,7 @@ class JasnyFileInput(CustomWidgetMixin):
     """
 
     def __init__(self):
-        
+
         self._field_renderer = FileInput()
 
     def __call__(self, field, **kwargs):
