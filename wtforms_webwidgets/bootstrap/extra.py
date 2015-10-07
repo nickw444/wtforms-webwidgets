@@ -8,7 +8,7 @@ from .core import PlainCheckbox, PlainRadio
 import wtforms.widgets.core as wt_core
 
 __all__ = ['JasnyImageInput', 'JasnyFileInput', 'MultiField', 'CheckboxGroup',
-           'RadioGroup', 'LabelAboveCheckbox']
+           'RadioGroup', 'LabelAboveCheckbox', 'AddOnInput']
 
 from wtforms.widgets import FileInput
 
@@ -70,6 +70,28 @@ class JasnyFileInput(CustomWidgetMixin):
         )
         return html
 
+@bootstrap_styled(input_class=None)
+class AddOnInput(CustomWidgetMixin):
+    """
+    Renders a field with an addon on either the left or right side
+    """
+    def __init__(self, left=None, right=None):
+        if left is None and right is None:
+            raise Exception("AddOnInput: Neither left or right text provided")
+
+        self.left = left
+        self.right = right
+        self._field_renderer = wt_core.TextInput()
+
+    def __call__(self, field, **kwargs):
+        return """
+        <div class="input-group">
+            <span class="input-group-addon">$</span>
+            {rendered_field}
+        </div>
+        """.format(
+            rendered_field=self._field_renderer(field, **kwargs)
+        )
 
 @bootstrap_styled(input_class=None)
 class MultiField(_MultiField, CustomWidgetMixin):
@@ -111,4 +133,41 @@ class LabelAboveCheckbox(wt_core.CheckboxInput):
     def __call__(self, field, **kwargs):
         field = wt_core.CheckboxInput.__call__(self, field, **kwargs)
         return "<div>{0}</div>".format(field)
+
+
+class UTCDatePickerInput(CustomWidgetMixin):
+    def __call__(self, field, **kwargs):
+        pass
+        # print("Rendering yo")
+        # return """
+        #     <div {{ 'class=has-error' if form.due_date.errors }}>
+        #         <label for="{field.id}">Due Date</label>
+        #         <div id="{field.id}" class='input-group date datetimepicker isodate-on-submit'>
+        #             {{ form.due_date(class="form-control", id="due_date_input") }}
+        #             <span class="input-group-addon">
+        #                 <i class="fa fa-calendar-o"></i>
+        #             </span>
+        #         </div>
+        #         {% for error in form.remind_me_date.errors %}
+        #             <span class="text-danger">{{ error }}</span>
+        #         {% endfor %}
+        #     </div>
+        # """
+
+        # html = """
+        # <div class="fileinput fileinput-new input-group" data-provides="fileinput" style="width:100%;">
+        #     <div class="form-control" data-trigger="fileinput">
+        #         <span class="fileinput-filename"></span>
+        #     </div>
+        #     <span class="input-group-addon btn btn-default btn-file">
+        #     <span class="fileinput-new">Select file</span>
+        #     <span class="fileinput-exists">Change</span>
+        #         {rendered_field}
+        #     </span>
+        #     <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+        # </div>
+        # """.format(
+        #     rendered_field=self._field_renderer(field, **kwargs)
+        # )
+        # return html
 
