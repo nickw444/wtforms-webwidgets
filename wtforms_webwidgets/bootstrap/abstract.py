@@ -5,8 +5,9 @@ A set of abstract widgets which require a subclass to be useful.
 from wtforms.widgets.core import Input, HTMLString
 from abc import ABCMeta
 from ..common import CustomWidgetMixin
+import wtforms.widgets.core as wt_core
 
-class BootstrapPlainCheckboxRadio(Input, CustomWidgetMixin):
+class BootstrapPlainCheckboxRadio(wt_core.CheckboxInput, CustomWidgetMixin):
     """
     Abstract widget for a Bootstrap Checkbox or Radio implementation.
     """
