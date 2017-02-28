@@ -17,7 +17,7 @@ class BootstrapPlainCheckboxRadio(wt_core.CheckboxInput, CustomWidgetMixin):
         if label in kwargs:
             label = kwargs.pop('label').strip()
 
-        html = """
+        html = u"""
         <div class="{input_type}">
             <label>{rendered_field}{label}</label>
         </div>
